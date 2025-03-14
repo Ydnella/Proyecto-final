@@ -1,35 +1,37 @@
 import random
 import datetime
 
-
 def generar_id():
-    # Número aleatorio de 4 dígitos
-    return str(random.randint(1000, 9999)for _ in range(4))
+    # Numero aleatorio de 4 dígitos
+    return str(random.randint(1000, 9999))
 
 
-# tarea vacia
-tareas = []
+Archivo_tareas = "tareas.txt"
 
 
 def cargar_tareas():
+    tareas = []
     try:
-        with open(tarea, "r") as file:
-            return [line.strip().split(" | ") for line in file.readlines()]
+        with open(Archivo_tareas, "r") as file:
+            # leemos las tareas del archivo
+            for line in file:
+                datos_tarea = line.strip().split(" | ")
+                if len(datos_tarea) == 6:  # Aseguramos que la tarea tenga 6 elementos
+                    tareas.append(datos_tarea)
     except FileNotFoundError:
         return []
+    return tareas
+
 
 # Guarda la lista de tareas en el archivo TXT
-
-
 def guardar_tareas(tareas):
-    with open(tarea, "w") as file:
+    with open(Archivo_tareas, "w") as file:
         for tarea in tareas:
             file.write(" | ".join(tarea) + "\n")
 
 
-# funcion para crear una tarea
+# Funcion para crear una tarea
 def crear_tarea():
-
     descripcion = input("Ingrese la descripcion de la tarea: ")
     fecha_limite = input("Ingrese la fecha limite (Dia/Mes/Año): ")
     prioridad = input("Ingrese la prioridad (alta, media, baja): ")
@@ -38,48 +40,41 @@ def crear_tarea():
 
     # Crear identificador único para la tarea
     tareas_id = generar_id()
-    while any(tarea["id"] == tareas_id for tarea in tareas):
-        tareas_id = generar_id()  # Si el esta en uso pues crea otro
+    tareas = cargar_tareas()  # Cargar tareas para asegurar que el ID sea único
+    while any(tarea[0] == tareas_id for tarea in tareas):
+        tareas_id = generar_id()  # Si el id está en uso, genera otro
 
     # Crear tarea con los detalles que se ingresaron
-    tarea = {
-        "id": tareas_id,
-        "descripcion": descripcion,
-        "fecha_limite": fecha_limite,
-        "prioridad": prioridad,
-        "categoria": categoria,
-        "estado": "Pendiente"
-    }
+    tarea = [tareas_id, descripcion, fecha_limite, prioridad, categoria]
 
-    # agregar tarea a la lista y mostrar su id.
-    tarea.append(tarea)
+    # Cargar tareas y agregar la nueva tarea
+    tareas.append(tarea)
+    guardar_tareas(tareas)  # Guardar las tareas actualizadas
     print(f"Tarea creada con éxito. ID: {tareas_id}")
 
 
 def leer_tareas():
+    tareas = cargar_tareas()
     if not tareas:
         print("No hay tareas")
         return
 
+    # Imprimir todas las tareas
+    print("Lista de tareas:")
+    for tarea in tareas:
+        print(f"ID: {tarea[0]}, Descripción: {tarea[1]}, Fecha Límite: {tarea[2]}, Prioridad: {tarea[3]}, Categoría: {tarea[4]}, Estado: {tarea[5]}")
 
-# busca los datos en la lista y los imprime
-print("Lista de tareas:")
-for tarea in tareas:
-    print(f"ID: {tarea['id']}, Descripción: {tarea['descripcion']}, Fecha Límite: {tarea['fecha_limite']}, Prioridad: {tarea['prioridad']}, Categoría: {tarea['categoria']}, Estado: {tarea['estado']}")
 
-
-# funcion para actualizar la tarea
-
+# Funcion para actualizar la tarea
 def actualizar_tarea():
     tareas = cargar_tareas()
 
-    tarea_id = int(
-        input("Ingrese el ID de la tarea que desea actualizar: "))  # Corregido
+    tarea_id = input("Ingrese el ID de la tarea que desea actualizar: ")
 
     # Buscar la tarea mediante el ID
     tarea_encontrada = None
     for tarea in tareas:
-        if int(tarea[0]) == tarea_id:  # Convertimos ID de la tarea a int para comparar
+        if tarea[0] == tarea_id:
             tarea_encontrada = tarea
             break
 
@@ -87,7 +82,7 @@ def actualizar_tarea():
         print("Tarea no encontrada.")
         return
 
-    # pedir al usuario la informacion nueva
+    # Pedir al usuario la información nueva
     descripcion = input(
         f"Nueva descripcion (actual: {tarea_encontrada[1]}): ") or tarea_encontrada[1]
     fecha_limite = input(
@@ -113,16 +108,16 @@ def actualizar_tarea():
 
 def recordar_tarea():
     tareas = cargar_tareas()
-    dia_actual = datetime.date.today()  # obtiene la fecha actual
+    dia_actual = datetime.date.today()  # Obtiene la fecha actual
 
     for tarea in tareas:
         try:
-            # Convertir limite fecha a objeto date
+            # Convertir límite de fecha a objeto date
             fecha_tarea = datetime.datetime.strptime(
                 tarea[2], "%d/%m/%Y").date()
-            # calcula la fecha limite con la actual y si no esta completada mostrara el recordatorio
+            # Calcula la fecha límite con la actual y si no está completada, muestra el recordatorio
             if 0 <= (fecha_tarea - dia_actual).days <= 3 and tarea[5].lower() != "completada":
-                # imprime el recordatorio
+                # Imprime el recordatorio
                 print(
                     f"Recordatorio - ID: {tarea[0]}, Descripción: {tarea[1]}, Fecha Límite: {tarea[2]}")
         except ValueError:
@@ -130,13 +125,14 @@ def recordar_tarea():
 
 
 def estadisticas():
-    # cuanta los las tareas dependiendo su estado y los imprime
     tareas = cargar_tareas()
     total = len(tareas)
-    completadas = sum(
-        1 for tarea in tareas if tarea[5].lower() == "completada")
+    completadas = sum(1 for tarea in tareas if tarea[5].lower() == "completada")
     pendientes = sum(1 for tarea in tareas if tarea[5].lower() == "pendiente")
     en_progreso = total - completadas - pendientes
 
     print(
         f"Total: {total}, Completadas: {completadas}, Pendientes: {pendientes}, En progreso: {en_progreso}")
+
+
+
