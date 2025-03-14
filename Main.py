@@ -1,11 +1,12 @@
 import Funciones_de_tareas
+# por ejemplo
 
 
 def menu():
     print("1. Crear tarea")
     print("2. Leer tareas")
     print("3. Actualizar tarea")
-    print("4. cargar tareas")
+    print("4. Cargar tareas")
     print("5. Salir")
     return int(input("Seleccione una opción: "))
 
