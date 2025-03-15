@@ -21,7 +21,20 @@ def cargar_tareas():
     except FileNotFoundError:
         print(f"Archivo {Archivo_tareas} no encontrado.")
         return []
-    print(f"Tareas cargadas: {tareas}")
+    
+    print("\n📋 Lista de tareas:")
+    for tarea in tareas:
+        if len(tarea) == 6:  # Aseguramos que la tarea tenga 6 elementos
+            print(f"🆔 ID: {tarea[0]}")
+            print(f"📝 Descripción: {tarea[1]}")
+            print(f"📅 Fecha Límite: {tarea[2]}")
+            print(f"⚡ Prioridad: {tarea[3]}")
+            print(f"📂 Categoría: {tarea[4]}")
+            print(f"✅ Estado: {tarea[5]}")
+            print("-" * 40)
+        else:
+            print(f"Tarea con ID {tarea[0]} tiene datos incompletos.")
+    
     return tareas
 
 def guardar_tareas(tareas):
