@@ -14,7 +14,10 @@ def cargar_tareas():
             # leemos las tareas del archivo
             for line in file:
                 datos_tarea = line.strip().split(" | ")
-                tareas.append(datos_tarea)
+                if len(datos_tarea) == 6:  # Aseguramos que la tarea tenga 6 elementos
+                    tareas.append(datos_tarea)
+                else:
+                    print(f"Datos incompletos en la línea: {line.strip()}")
     except FileNotFoundError:
         print(f"Archivo {Archivo_tareas} no encontrado.")
         return []
@@ -32,7 +35,7 @@ def crear_tarea():
     fecha_limite = input("Ingrese la fecha limite (Dia/Mes/Año): ")
     prioridad = input("Ingrese la prioridad (alta, media, baja): ")
     categoria = input("Ingrese la categoria: ")
-    estado = input("Ingrese el estado de la tarea (pendiente, en progreso, completada): ")
+    estado = str (input("Ingrese el estado de la tarea (pendiente, en progreso, completada): "))
 
     # Crear identificador único para la tarea
     tareas_id = generar_id()
@@ -57,13 +60,16 @@ def leer_tareas():
 
     print("\n📋 Lista de tareas:")
     for tarea in tareas:
-        print(f"🆔 ID: {tarea[0]}")
-        print(f"📝 Descripción: {tarea[1]}")
-        print(f"📅 Fecha Límite: {tarea[2]}")
-        print(f"⚡ Prioridad: {tarea[3]}")
-        print(f"📂 Categoría: {tarea[4]}")
-        print(f"✅ Estado: {tarea[5]}")
-        print("-" * 40)
+        if len(tarea) == 6:  # Aseguramos que la tarea tenga 6 elementos
+            print(f"🆔 ID: {tarea[0]}")
+            print(f"📝 Descripción: {tarea[1]}")
+            print(f"📅 Fecha Límite: {tarea[2]}")
+            print(f"⚡ Prioridad: {tarea[3]}")
+            print(f"📂 Categoría: {tarea[4]}")
+            print(f"✅ Estado: {tarea[5]}")
+            print("-" * 40)
+        else:
+            print(f"Tarea con ID {tarea[0]} tiene datos incompletos.")
 
 def actualizar_tarea():
     tareas = cargar_tareas()

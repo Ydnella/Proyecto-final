@@ -1,1 +1,2 @@
-3949 | compras | 12 | alta | pendiente
+1633 | compras | 2/12/2025 | alta | compras | pendiente
+9670 | compras | 23/5/2025 | alta | compras | pendiente
