@@ -1,15 +1,16 @@
 import Funciones_de_tareas
-# por ejemplo2.0
-
 
 def menu():
     print("1. Crear tarea")
     print("2. Leer tareas")
     print("3. Actualizar tarea")
-    print("4. Eliminarss tareas")
+    print("4. Eliminar tarea")
     print("5. Salir")
-    return int(input("Seleccione una opción: "))
-
+    try:
+        return int(input("Seleccione una opción: "))
+    except ValueError:
+        print("Por favor, ingrese un número válido.")
+        return 0
 
 if __name__ == "__main__":
     while True:
