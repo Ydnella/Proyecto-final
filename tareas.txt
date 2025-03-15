@@ -1,1 +1,2 @@
-2953 | aj | aj | ka | ja
+3949 | compras | 12 | alta | pendiente
+1714 | compras  | 12/5/2025 | alta | compras | pendiente
