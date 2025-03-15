@@ -16,7 +16,11 @@ def menu():
     print("         5. Salir")
     print("\n")
     print("----------------------------------")
-    return int(input("Seleccione una opción: "))
+    try:
+        return int(input("Seleccione una opción: "))
+    except ValueError:
+        print("Por favor, ingrese un número válido.")
+        return 0
 
 
 if __name__ == "__main__":
