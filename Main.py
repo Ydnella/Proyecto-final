@@ -12,6 +12,7 @@ def menu():
     print("         2. Leer tareas          ")
     print("         3. Actualizar tarea     ")
     print("         4. Eliminar tarea       ")
+    print("         5. estadisticas         ")
     print("\n")
     print("         6. Salir                ")
     print("\n")
@@ -47,6 +48,11 @@ if __name__ == "__main__":
                 if input("Desea volver al menu principal? (s/n): ").lower() == 's':
                     break
         elif opcion == 5:
+            while True:
+                Funciones_de_tareas.estadisticas()
+                if input("Desea volver al menu principal? (s/n): ").lower() == 's':
+                    break
+        elif opcion == 6:
             break
         else:
             print("Opción no válida")
