@@ -1,2 +1,3 @@
 1633 | compras | 2/12/2025 | alta | compras | pendiente
 9670 | compras | 23/5/2025 | alta | compras | pendiente
+1662 | ventas | 5/5/2025 | media | ventas | pendiente

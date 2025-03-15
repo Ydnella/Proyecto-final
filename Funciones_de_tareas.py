@@ -22,6 +22,17 @@ def cargar_tareas():
         print(f"Archivo {Archivo_tareas} no encontrado.")
         return []
     
+    imprimir_tareas(tareas)
+    return tareas
+
+def guardar_tareas(tareas):
+    with open(Archivo_tareas, "w") as file:
+        for tarea in tareas:
+            file.write(" | ".join(tarea) + "\n")
+    print(f"Tareas guardadas: {tareas}")
+    imprimir_tareas(tareas)
+
+def imprimir_tareas(tareas):
     print("\n📋 Lista de tareas:")
     for tarea in tareas:
         if len(tarea) == 6:  # Aseguramos que la tarea tenga 6 elementos
@@ -34,14 +45,6 @@ def cargar_tareas():
             print("-" * 40)
         else:
             print(f"Tarea con ID {tarea[0]} tiene datos incompletos.")
-    
-    return tareas
-
-def guardar_tareas(tareas):
-    with open(Archivo_tareas, "w") as file:
-        for tarea in tareas:
-            file.write(" | ".join(tarea) + "\n")
-    print(f"Tareas guardadas: {tareas}")
 
 def crear_tarea():
     descripcion = input("Ingrese la descripcion de la tarea: ")
@@ -71,18 +74,7 @@ def leer_tareas():
         print("📌 No hay tareas registradas.")
         return
 
-    print("\n📋 Lista de tareas:")
-    for tarea in tareas:
-        if len(tarea) == 6:  # Aseguramos que la tarea tenga 6 elementos
-            print(f"🆔 ID: {tarea[0]}")
-            print(f"📝 Descripción: {tarea[1]}")
-            print(f"📅 Fecha Límite: {tarea[2]}")
-            print(f"⚡ Prioridad: {tarea[3]}")
-            print(f"📂 Categoría: {tarea[4]}")
-            print(f"✅ Estado: {tarea[5]}")
-            print("-" * 40)
-        else:
-            print(f"Tarea con ID {tarea[0]} tiene datos incompletos.")
+    
 
 def actualizar_tarea():
     tareas = cargar_tareas()
@@ -140,21 +132,6 @@ def eliminar_tarea():
     # Guardar cambios en el archivo
     guardar_tareas(tareas)
     print("Tarea eliminada con éxito.")
-
-def recordar_tarea():
-    tareas = cargar_tareas()
-    dia_actual = datetime.date.today()  # Obtiene la fecha actual
-
-    for tarea in tareas:
-        try:
-            # Convertir límite de fecha a objeto date
-            fecha_tarea = datetime.datetime.strptime(tarea[2], "%d/%m/%Y").date()
-            # Calcula la fecha límite con la actual y si no está completada, muestra el recordatorio
-            if 0 <= (fecha_tarea - dia_actual).days <= 3 and tarea[5].lower() != "completada":
-                # Imprime el recordatorio
-                print(f"Recordatorio - ID: {tarea[0]}, Descripción: {tarea[1]}, Fecha Límite: {tarea[2]}")
-        except ValueError:
-            pass  # Ignorar fechas inválidas
 
 def estadisticas():
     tareas = cargar_tareas()
