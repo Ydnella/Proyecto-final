@@ -1,6 +1,4 @@
 import random
-import datetime
-
 def generar_id():
     # Numero aleatorio de 4 dígitos
     return str(random.randint(1000, 9999))
@@ -13,11 +11,11 @@ def cargar_tareas():
         with open(Archivo_tareas, "r") as file:
             # leemos las tareas del archivo
             for line in file:
-                datos_tarea = line.strip().split(" | ")
+                datos_tarea = line.strip().split(" | ") # Elimina los espacios en blanco y divide los datos.
                 if len(datos_tarea) == 6:  # Aseguramos que la tarea tenga 6 elementos
                     tareas.append(datos_tarea)
                 else:
-                    print(f"Datos incompletos en la línea: {line.strip()}")
+                    print(f"Datos incompletos en la línea: {line.strip()}") # Imprime la línea con datos incompletos.
     except FileNotFoundError:
         print(f"Archivo {Archivo_tareas} no encontrado.")
         return []
@@ -26,10 +24,11 @@ def cargar_tareas():
     return tareas
 
 def guardar_tareas(tareas):
-    with open(Archivo_tareas, "w") as file:
+    with open(Archivo_tareas, "w") as file: # Abre el archivo en modo escritura
         for tarea in tareas:
-            file.write(" | ".join(tarea) + "\n")
+            file.write(" | ".join(tarea) + "\n") # Escribe las tareas en el archivo
     print(f"Tareas guardadas: {tareas}")
+   
     imprimir_tareas(tareas)
 
 def imprimir_tareas(tareas):
@@ -37,7 +36,7 @@ def imprimir_tareas(tareas):
     for tarea in tareas:
         if len(tarea) == 6:  # Aseguramos que la tarea tenga 6 elementos
             print(f"🆔 ID: {tarea[0]}")
-            print(f"📝 Descripción: {tarea[1]}")
+            print(f"📝 Descripción: {tarea[1]}") 
             print(f"📅 Fecha Límite: {tarea[2]}")
             print(f"⚡ Prioridad: {tarea[3]}")
             print(f"📂 Categoría: {tarea[4]}")
@@ -84,7 +83,7 @@ def actualizar_tarea():
     # Buscar la tarea mediante el ID
     tarea_encontrada = None
     for tarea in tareas:
-        if tarea[0] == tarea_id:
+        if tarea[0] == tarea_id: # Compara el ID de la tarea con el ID ingresado
             tarea_encontrada = tarea
             break
 
@@ -118,7 +117,7 @@ def eliminar_tarea():
     # Buscar la tarea mediante el ID
     tarea_encontrada = None
     for tarea in tareas:
-        if tarea[0] == tarea_id:
+        if tarea[0] == tarea_id: # Compara el ID de la tarea con el ID ingresado
             tarea_encontrada = tarea
             break
 
@@ -132,15 +131,15 @@ def eliminar_tarea():
     # Guardar cambios en el archivo
     guardar_tareas(tareas)
     print("Tarea eliminada con éxito.")
-
+#cuenta las tareas por estado
 def estadisticas():
     tareas = cargar_tareas()
     total = len(tareas)
-    completadas = sum(1 for tarea in tareas if tarea[5].lower() == "completada")
-    pendientes = sum(1 for tarea in tareas if tarea[5].lower() == "pendiente")
-    en_progreso = total - completadas - pendientes
+    completadas = sum(1 for tarea in tareas if tarea[5].lower() == "completada") # Cuenta las tareas completadas
+    pendientes = sum(1 for tarea in tareas if tarea[5].lower() == "pendiente") # Cuenta las tareas pendientes
+    en_progreso = total - completadas - pendientes # Calcula las tareas en progreso
 
-    print(f"Total: {total}, Completadas: {completadas}, Pendientes: {pendientes}, En progreso: {en_progreso}")
+    print(f"Total: {total}, Completadas: {completadas}, Pendientes: {pendientes}, En progreso: {en_progreso}") # Imprime las estadísticas
 
 
 
