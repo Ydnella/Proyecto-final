@@ -1,3 +1,5 @@
 1633 | compras | 2/12/2025 | alta | compras | pendiente
 9670 | compras | 23/5/2025 | alta | compras | pendiente
 1662 | ventas | 5/5/2025 | media | ventas | pendiente
+3283 | asdasjf | 12/12/25 | baja | pendiente | pendiente
+9057 | asdkjnsadj | 12/12/25 | alta | okay | en progreso
