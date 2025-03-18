@@ -1,6 +1,5 @@
 import random
 import datetime
-import prioridad
 
 
 def generar_id():
@@ -18,10 +17,12 @@ def cargar_tareas():
         with open(Archivo_tareas, "r") as file:
             # leemos las tareas del archivo
             for line in file:
+                # Elimina los espacios en blanco y divide los datos.
                 datos_tarea = line.strip().split(" | ")
                 if len(datos_tarea) == 6:  # Aseguramos que la tarea tenga 6 elementos
                     tareas.append(datos_tarea)
                 else:
+                    # Imprime la línea con datos incompletos.
                     print(f"Datos incompletos en la línea: {line.strip()}")
     except FileNotFoundError:
         print(f"Archivo {Archivo_tareas} no encontrado.")
@@ -32,10 +33,12 @@ def cargar_tareas():
 
 
 def guardar_tareas(tareas):
-    with open(Archivo_tareas, "w") as file:
+    with open(Archivo_tareas, "w") as file:  # Abre el archivo en modo escritura
         for tarea in tareas:
+            # Escribe las tareas en el archivo
             file.write(" | ".join(tarea) + "\n")
     print(f"Tareas guardadas: {tareas}")
+
     imprimir_tareas(tareas)
 
 
@@ -94,7 +97,7 @@ def actualizar_tarea():
     # Buscar la tarea mediante el ID
     tarea_encontrada = None
     for tarea in tareas:
-        if tarea[0] == tarea_id:
+        if tarea[0] == tarea_id:  # Compara el ID de la tarea con el ID ingresado
             tarea_encontrada = tarea
             break
 
@@ -134,7 +137,7 @@ def eliminar_tarea():
     # Buscar la tarea mediante el ID
     tarea_encontrada = None
     for tarea in tareas:
-        if tarea[0] == tarea_id:
+        if tarea[0] == tarea_id:  # Compara el ID de la tarea con el ID ingresado
             tarea_encontrada = tarea
             break
 
