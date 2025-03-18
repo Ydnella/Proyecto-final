@@ -1,4 +1,5 @@
 import Funciones_de_tareas
+import prioridad
 
 
 def menu():
@@ -12,9 +13,10 @@ def menu():
     print("         2. Leer tareas          ")
     print("         3. Actualizar tarea     ")
     print("         4. Eliminar tarea       ")
-    print("         5. estadisticas         ")
+    print("         5. Estadísticas         ")
+    print("         6. Ordenar por prioridad")
     print("\n")
-    print("         6. Salir                ")
+    print("         7. Salir                ")
     print("\n")
     print("----------------------------------")
     try:
@@ -53,6 +55,13 @@ if __name__ == "__main__":
                 if input("Desea volver al menu principal? (s/n): ").lower() == 's':
                     break
         elif opcion == 6:
+            while True:
+                tareas = Funciones_de_tareas.leer_tareas()
+                tareas_ordenadas = prioridad.ordenar_por_prioridad(tareas)
+                prioridad.imprimir_tareas(tareas_ordenadas)
+                if input("Desea volver al menu principal? (s/n): ").lower() == 's':
+                    break
+        elif opcion == 7:
             break
         else:
             print("Opción no válida")

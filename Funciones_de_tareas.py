@@ -12,7 +12,6 @@ Archivo_tareas = "tareas.txt"
 
 def cargar_tareas():
     tareas = []
-    prioridad.ordernar_por_prioridad(tareas)
     try:
         with open(Archivo_tareas, "r") as file:
             # leemos las tareas del archivo
