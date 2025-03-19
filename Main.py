@@ -1,11 +1,24 @@
 import Funciones_de_tareas
 import prioridad
+import os
+import sys
+import time
+import json
+
+current_time = time.localtime()
+
+print("Cargando el sistema por favor espere...")
+time.sleep(4)
 
 
 def menu():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("Fecha y hora actual: ", time.strftime(
+        "%d/%m/%Y %H:%M:%S", current_time))
     print("----------------------------------")
-    print("\n")
     print("Bienvenido al sistema de tareas")
+    print("----------------------------------")
+    print("Selecione una opción del menú:    ")
     print("\n")
     print("         Menú principal          ")
     print("\n")
@@ -17,7 +30,6 @@ def menu():
     print("         6. Ordenar por prioridad")
     print("\n")
     print("         7. Salir                ")
-    print("\n")
     print("----------------------------------")
     try:
         return int(input("Seleccione una opción: "))
@@ -65,3 +77,8 @@ if __name__ == "__main__":
             break
         else:
             print("Opción no válida")
+    print("Gracias por usar el sistema de tareas.")
+    print("Saliendo del sistema...")
+    time.sleep(4)
+    print("Hasta luego.")
+    sys.exit(0)
