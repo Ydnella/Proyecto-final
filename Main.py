@@ -19,6 +19,7 @@ def menu():
     print("Bienvenido al sistema de tareas")
     print("----------------------------------")
     print("Selecione una opción del menú:    ")
+    print("Utlizando numeros del 1 al 7")
     print("\n")
     print("         Menú principal          ")
     print("\n")
