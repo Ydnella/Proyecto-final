@@ -1,4 +1,4 @@
-from  Funciones_de_tareas import imprimir_tareas
+from Funciones_de_tareas import imprimir_tareas
 Archivo_tareas = "tareas.txt"
 
 
@@ -22,6 +22,7 @@ def cargar_tareas():
     imprimir_tareas(tareas)
     return tareas
 
+
 def guardar_tareas(tareas):
     with open(Archivo_tareas, "w") as file:  # Abre el archivo en modo escritura
         for tarea in tareas:
@@ -30,3 +31,10 @@ def guardar_tareas(tareas):
     print(f"Tareas guardadas: {tareas}")
 
     imprimir_tareas(tareas)
+
+
+def ordenar_por_prioridad(tareas):
+    prioridad_orden = {'alta': 1, 'media': 2, 'baja': 3}
+    tareas_ordenadas = sorted(
+        tareas, key=lambda tarea: prioridad_orden.get(tarea[3].lower(), 4))
+    return tareas_ordenadas
