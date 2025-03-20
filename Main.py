@@ -19,7 +19,7 @@ def menu():
     print("Bienvenido al sistema de tareas")
     print("----------------------------------")
     print("Selecione una opción del menú:    ")
-    print("Utlizando numeros del 1 al 7")
+    print("Utlizando numeros del 1 al 7:")
     print("\n")
     print("         Menú principal          ")
     print("\n")
@@ -44,30 +44,39 @@ if __name__ == "__main__":
         opcion = menu()
         if opcion == 1:
             while True:
+
+                print("Creando tarea...")
+
+                os.system('cls' if os.name == 'nt' else 'clear')
                 Funciones_de_tareas.crear_tarea()
                 if input("Desea volver al menu principal? (s/n): ").lower() == 's':
                     break
         elif opcion == 2:
+            os.system('cls' if os.name == 'nt' else 'clear')
             while True:
                 Funciones_de_tareas.leer_tareas()
                 if input("Desea volver al menu principal? (s/n): ").lower() == 's':
                     break
         elif opcion == 3:
+            os.system('cls' if os.name == 'nt' else 'clear')
             while True:
                 Funciones_de_tareas.actualizar_tarea()
                 if input("Desea volver al menu principal? (s/n): ").lower() == 's':
                     break
         elif opcion == 4:
+            os.system('cls' if os.name == 'nt' else 'clear')
             while True:
                 Funciones_de_tareas.eliminar_tarea()
                 if input("Desea volver al menu principal? (s/n): ").lower() == 's':
                     break
         elif opcion == 5:
+            os.system('cls' if os.name == 'nt' else 'clear')
             while True:
                 Funciones_de_tareas.estadisticas()
                 if input("Desea volver al menu principal? (s/n): ").lower() == 's':
                     break
         elif opcion == 6:
+            os.system('cls' if os.name == 'nt' else 'clear')
             while True:
                 tareas = Funciones_de_tareas.leer_tareas()
                 tareas_ordenadas = prioridad.ordenar_por_prioridad(tareas)
@@ -78,6 +87,8 @@ if __name__ == "__main__":
             break
         else:
             print("Opción no válida")
+            time.sleep(1)
+    os.system('cls' if os.name == 'nt' else 'clear')
     print("Gracias por usar el sistema de tareas.")
     print("Saliendo del sistema...")
     time.sleep(4)
