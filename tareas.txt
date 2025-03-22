@@ -1,5 +1,5 @@
-1633 | compras | 2/12/2025 | alta | compras | pendiente
+1633 | Campo | 2/12/2025 | baja | compras | pendiente
 9670 | compras | 23/5/2025 | alta | compras | pendiente
 1662 | ventas | 5/5/2025 | media | ventas | pendiente
-5768 | prueba | 12/12/25 | media | prueba | en progreso
 8754 | prueba | 12/12/2025 | alta | prueba | pediente
+9740 | Moises | 12/12/2025 | alta | Sabado | en progreso

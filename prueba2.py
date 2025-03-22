@@ -1,3 +1,6 @@
+from Funciones_de_tareas import cargar_tareas
+
+
 def cargar_tareas():
     Archivo_tareas = "tareas.txt"
     tareas = []
@@ -24,7 +27,7 @@ def ordenar_por_prioridad(tareas):
 
 def imprimir_tareas(tareas):
     for tarea in tareas:
-        print(f"ID: {tarea[0]}")
+        print(f"🆔 ID: {tarea[0]}")
         print(
-            f"Descripción: {tarea[1]}, Fecha límite: {tarea[2]}, Prioridad: {tarea[3]}, Categoría: {tarea[4]}, Estado: {tarea[5]}")
+            f"📝 Descripción: {tarea[1]},📅 Fecha límite: {tarea[2]},⚡ Prioridad: {tarea[3]},📂 Categoría: {tarea[4]},✅ Estado: {tarea[5]}")
         print("-" * 40)
